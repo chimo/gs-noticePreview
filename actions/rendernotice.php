@@ -24,10 +24,12 @@ class RenderNoticeAction extends Action
     {
         $profile = Profile::getKV('id', $profile_id);
 
-        Event::handle('ChrStartRenderNotice', array(&$raw_content, $profile/*, $parent*/));
-
-        // TODO: we could try to figure out the parent notice, maybe
-        $raw_content = common_render_content($raw_content, $profile, null);
+        if (Event::handle('ChrStartRenderNotice', array(&$raw_content, $profile, &$render/*, $parent*/))) {
+            if ($render !== false) {
+                // TODO: we could try to figure out the parent notice, maybe
+                $raw_content = common_render_content($raw_content, $profile, null);
+            }
+        }
 
         Event::handle('ChrEndRenderNotice', array(&$raw_content, $profile/*, $parent*/));
 

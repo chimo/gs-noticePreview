@@ -17,6 +17,7 @@
         $noticeForm = $noticeFormContainer.children( "form" )
         .clone()
         .insertAfter( $noticeFormContainer )
+        .wrap( "<div class='input_form current' id='input_form_status_enhanced'>" )
         .tabs();
 
     /**
@@ -45,6 +46,15 @@
             console.log( err );
         } );
     } );
+
+    /**
+     * Make the "status type" bar ("status, bookmark, event, etc.") work with our
+     * enhanced status form instead of the original one
+     */
+    $( "#input_form_nav_status" )
+        .attr( "id", "input_form_nav_status_enhanced" )
+        .children( "a" )
+        .attr( "onclick", "return SN.U.switchInputFormTab('status_enhanced');" );
 
     /**
      * Here, we monkey-patch the GS function that clones the main

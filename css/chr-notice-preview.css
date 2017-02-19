@@ -9,7 +9,15 @@
     position: relative;
 }
 
-#chr-notice-preview-container {
+#input_form_status > form {
+    display: none;
+}
+
+#chr-notice-preview {
+    text-align: left;
+}
+
+.chr-notice-preview-container {
     border: 0;
 }
 

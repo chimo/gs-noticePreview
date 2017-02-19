@@ -21,9 +21,9 @@ class NoticePreviewPlugin extends Plugin
 
     function onStartShowNoticeFormData($action)
     {
-        $action->elementStart('div', array('id' => 'chr-notice-preview-container'));
+        $action->elementStart('div', array('class' => 'chr-notice-preview-container'));
 
-        $action->elementStart('ul');
+        $action->elementStart('ul', array('class' => 'chr-tabs'));
 
         $action->elementStart('li');
         $action->element('a', array('href' => '#chr-notice-compose'), 'Compose');

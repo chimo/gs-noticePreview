@@ -13,12 +13,20 @@
      * We enhance the reply forms cloned by GS via monkey-patch
      * later (see below)
      */
-    var $noticeFormContainer = $( "#input_form_status" )
-        $noticeForm = $noticeFormContainer.children( "form" )
-        .clone()
-        .insertAfter( $noticeFormContainer )
-        .wrap( "<div class='input_form current' id='input_form_status_enhanced'>" )
-        .tabs();
+    var $noticeFormContainer = $( "#input_form_status" );
+
+    if ( $noticeFormContainer.length > 0 ) {
+        $noticeFormContainer.children( "form" )
+            .clone()
+            .insertAfter( $noticeFormContainer )
+            .wrap( "<div class='input_form current' id='input_form_status_enhanced'>" )
+            .tabs();
+    } else {
+        // If we're on a page where the #input_form_status doesn't exist,
+        // we're probably(?) on a page without a notice list (ex: /notice/new).
+        // In that case, just enhance the main Notice Form.
+        $( ".chr-notice-preview-container" ).tabs();
+    }
 
     /**
      * When clicking on the "Preview" tab, ask the backend to render the

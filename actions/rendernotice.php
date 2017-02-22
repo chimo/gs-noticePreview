@@ -12,6 +12,12 @@ class RenderNoticeAction extends Action
     {
         parent::prepare($args);
 
+        if (!common_logged_in()) {
+            $this->clientError(_('Not logged in.'));
+
+            return;
+        }
+
         $user = common_current_user();
         $profile = $user->getProfile();
 

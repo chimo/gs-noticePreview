@@ -73,7 +73,7 @@ class NoticePreviewPlugin extends Plugin
                             'homepage' => 'https://github.com/chimo/gs-noticePreview',
                             'description' =>
                             // TRANS: Plugin description.
-                            _m('Preview your notice before submitting it'));
+                            _m('Preview your notice before posting it'));
         return true;
     }
 }

@@ -14,24 +14,29 @@ class RenderNoticeAction extends Action
 
         $raw_content = $this->arg("raw_content");
         $profile_id = $this->int("profile_id");
+        $parent_notice_id = $this->int("parent_notice");
 
-        $this->rendered = $this->render($raw_content, $profile_id);
+        $this->rendered = $this->render($raw_content, $profile_id, $parent_notice_id);
 
         return true;
     }
 
-    function render($raw_content, $profile_id)
+    function render($raw_content, $profile_id, $parent_notice_id)
     {
         $profile = Profile::getKV('id', $profile_id);
+        $parent_notice = Notice::getKV('id', $parent_notice_id);
 
-        if (Event::handle('ChrStartRenderNotice', array(&$raw_content, $profile, &$render/*, $parent*/))) {
+        if (!$parent_notice instanceof Notice) {
+            $parent_notice = null;
+        }
+
+        if (Event::handle('ChrStartRenderNotice', array(&$raw_content, $profile, &$render, $parent_notice))) {
             if ($render !== false) {
-                // TODO: we could try to figure out the parent notice, maybe
-                $raw_content = common_render_content($raw_content, $profile, null);
+                $raw_content = common_render_content($raw_content, $profile, $parent_notice);
             }
         }
 
-        Event::handle('ChrEndRenderNotice', array(&$raw_content, $profile/*, $parent*/));
+        Event::handle('ChrEndRenderNotice', array(&$raw_content, $profile, $parent_notice));
 
         return $raw_content;
     }

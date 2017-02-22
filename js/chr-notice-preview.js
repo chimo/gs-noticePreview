@@ -39,12 +39,13 @@
         var $previewTab = $( this ),
             $tabContainer = $previewTab.closest( ".chr-notice-preview-container" ),
             $previewContainer = $tabContainer.find( "#chr-notice-preview" ),
+            parentNotice = $tabContainer.find( "#notice_in-reply-to" ).val(),
             $noticeTextarea = $tabContainer.find( ".notice_data-text" ),
             noticeText = $noticeTextarea.val(),
             encodedNoticeText = encodeURIComponent( noticeText );
 
         // TODO: non-absolute url
-        $.post( "/main/render-notice", "raw_content=" + encodedNoticeText + "&profile_id=1&ajax=true",
+        $.post( "/main/render-notice", "raw_content=" + encodedNoticeText + "&profile_id=1&ajax=true&parent_notice=" + parentNotice,
             function( data ) {
                 $previewContainer.html( $( '#chr-rendered-notice', data ).html() );
             }

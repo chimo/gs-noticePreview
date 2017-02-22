@@ -1,3 +1,4 @@
+/*global SN: false*/
 ( function() {
     /**
      * We can't just enhance the main Notice Form with

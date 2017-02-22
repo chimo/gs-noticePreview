@@ -45,7 +45,7 @@
             encodedNoticeText = encodeURIComponent( noticeText );
 
         // TODO: non-absolute url
-        $.post( "/main/render-notice", "raw_content=" + encodedNoticeText + "&profile_id=1&ajax=true&parent_notice=" + parentNotice,
+        $.post( "/main/render-notice", "raw_content=" + encodedNoticeText + "&ajax=true&parent_notice=" + parentNotice,
             function( data ) {
                 $previewContainer.html( $( '#chr-rendered-notice', data ).html() );
             }

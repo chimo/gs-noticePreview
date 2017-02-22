@@ -12,18 +12,19 @@ class RenderNoticeAction extends Action
     {
         parent::prepare($args);
 
+        $user = common_current_user();
+        $profile = $user->getProfile();
+
         $raw_content = $this->arg("raw_content");
-        $profile_id = $this->int("profile_id");
         $parent_notice_id = $this->int("parent_notice");
 
-        $this->rendered = $this->render($raw_content, $profile_id, $parent_notice_id);
+        $this->rendered = $this->render($raw_content, $profile, $parent_notice_id);
 
         return true;
     }
 
-    function render($raw_content, $profile_id, $parent_notice_id)
+    function render($raw_content, $profile, $parent_notice_id)
     {
-        $profile = Profile::getKV('id', $profile_id);
         $parent_notice = Notice::getKV('id', $parent_notice_id);
 
         if (!$parent_notice instanceof Notice) {

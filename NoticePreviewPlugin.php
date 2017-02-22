@@ -47,7 +47,6 @@ class NoticePreviewPlugin extends Plugin
 
         // The 'Preview' container
         $action->elementStart('div', array('id' => 'chr-notice-preview'));
-        // TODO: Get the content from the notice textbox and render it.
         $action->elementEnd('div');
 
         // Close the 'tabs' container

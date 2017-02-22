@@ -21,6 +21,10 @@
     border: 0;
 }
 
+.chr-notice-preview-container .error {
+    width: auto;
+}
+
 .form_notice {
     border: 1px solid #aaa;
     border-radius: 4px;

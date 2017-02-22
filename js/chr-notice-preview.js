@@ -49,10 +49,11 @@
                 $previewContainer.html( $( '#chr-rendered-notice', data ).html() );
             }
         )
-        .error( function( err ) {
-            // TODO: user feedback
-            console.log('err');
-            console.log( err );
+        .error( function() {
+            var msg = "An error has occured. Please contact the instance admin if the issue persists.",
+                $html = $( "<div class='error'>" ).append( "<p>" + msg + "</p>" );
+
+            $previewContainer.html( $html );
         } );
     } );
 

@@ -41,11 +41,16 @@
             $previewContainer = $tabContainer.find( "#chr-notice-preview" ),
             parentNotice = $tabContainer.find( "#notice_in-reply-to" ).val(),
             $noticeTextarea = $tabContainer.find( ".notice_data-text" ),
-            noticeText = $noticeTextarea.val(),
-            encodedNoticeText = encodeURIComponent( noticeText );
+            noticeText = $noticeTextarea.val();
 
         // TODO: non-absolute url
-        $.post( "/main/render-notice", "raw_content=" + encodedNoticeText + "&ajax=true&parent_notice=" + parentNotice,
+        $.post(
+            "/main/render-notice",
+            {
+                "raw_content": noticeText,
+                "ajax": true,
+                "parent_notice": parentNotice
+            },
             function( data ) {
                 $previewContainer.html( $( '#chr-rendered-notice', data ).html() );
             }
